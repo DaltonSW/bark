@@ -80,6 +80,7 @@ func Init(opts BarkOptions) {
 	styles.Levels[log.DebugLevel] = lipgloss.NewStyle().SetString("DEBUG ").Padding(0, 1).Foreground(lipgloss.Color(mergedOpts.DebugHex)).Bold(true)
 
 	stdLogger.SetStyles(styles)
+	stdLogger.SetTimeFormat(mergedOpts.TimeFormat)
 
 	loggers = append(loggers, stdLogger)
 }
@@ -122,7 +123,7 @@ func Debug(msg string) {
 
 func DebugAndWait(msg string) {
 	for _, logger := range loggers {
-		logger.Debug(fmt.Sprintf("%v (Awaiting Return)", msg))
+		logger.Debug(fmt.Sprintf("%v (󰌑)", msg))
 	}
 
 	fmt.Scanln()
